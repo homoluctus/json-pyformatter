@@ -1,4 +1,4 @@
-# JsonFormatter
+# json-pyformatter
 
 Python logging outputs as JSON.<br>
 This JsonFormatter is written in Pure Python.
@@ -7,7 +7,7 @@ This JsonFormatter is written in Pure Python.
 
 ```python
 import logging
-from jsonformmatter.formatter import JsonFormatter
+from json_pyformmatter import JsonFormatter
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -76,7 +76,7 @@ When exc_info is True, the result includes traceback infomation as follows:
 }
 ```
 
-Message type is dict:
+Logging message type is dict:
 
 ```bash
 {
