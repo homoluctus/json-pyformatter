@@ -3,6 +3,12 @@
 Python logging outputs as JSON.<br>
 This JsonFormatter is written in Pure Python.
 
+## Installation
+
+```bash
+pip install json-pyformatter
+```
+
 ## Usage
 
 ```python
@@ -42,7 +48,6 @@ Other supported fields are:
 |message|The result of record.getMessage(), computed just as the record is emitted|
 
 In details, please refere to [logrecord-attributes](https://docs.python.org/3/library/logging.html#logrecord-attributes)
-
 
 ## Output
 
