@@ -1,13 +1,24 @@
-# JsonFormatter
+# json-pyformatter
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/homoluctus/json-pyformatter/Test)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/homoluctus/json-pyformatter?include_prereleases)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/json-pyformatter)
+![GitHub](https://img.shields.io/github/license/homoluctus/json-pyformatter)
 
 Python logging outputs as JSON.<br>
 This JsonFormatter is written in Pure Python.
+
+## Installation
+
+```bash
+pip install json-pyformatter
+```
 
 ## Usage
 
 ```python
 import logging
-from jsonformmatter.formatter import JsonFormatter
+from json_pyformmatter import JsonFormatter
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -43,7 +54,6 @@ Other supported fields are:
 
 In details, please refere to [logrecord-attributes](https://docs.python.org/3/library/logging.html#logrecord-attributes)
 
-
 ## Output
 
 ```bash
@@ -73,5 +83,19 @@ When exc_info is True, the result includes traceback infomation as follows:
     'raise TypeError(message)',
     'TypeError: error occurred !!'
   ]
+}
+```
+
+Logging message type is dict:
+
+```bash
+{
+  'asctime': '2019-12-01 23:34:32',
+  'levelname': 'INFO',
+  'message': {
+    'id': '001',
+    'msg': 'This is test.',
+    'name': 'test'
+  }
 }
 ```

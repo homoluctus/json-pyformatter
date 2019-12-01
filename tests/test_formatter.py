@@ -5,7 +5,7 @@ import filecmp
 from pathlib import Path
 
 # from collections import OrderedDict
-from jsonformatter.formatter import JsonFormatter
+from json_pyformatter.formatter import JsonFormatter
 
 
 @pytest.fixture()
@@ -175,3 +175,14 @@ class TestJsonFormatter:
         )
 
         Path(result_file).unlink()
+
+    def test_message_as_dict(self, caplog, logger):
+        logger.handlers[0].setFormatter(JsonFormatter())
+
+        message = {'id': '001', 'name': 'test', 'msg': 'This is test.'}
+        logger.info(message)
+        result = json.loads(caplog.text)
+
+        assert result['message'] == message
+        assert isinstance(result['message'], dict) is True
+        assert tuple(result.keys()) == JsonFormatter.default_fields

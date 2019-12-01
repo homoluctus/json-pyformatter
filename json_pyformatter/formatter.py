@@ -73,6 +73,11 @@ class JsonFormatter(Formatter):
             return target
         return None
 
+    def getMessage(self, record):
+        if isinstance(record.msg, (list, tuple, dict)):
+            return record.msg
+        return record.getMessage()
+
     def _format_json(self, record):
         return json.dumps(record, ensure_ascii=False, indent=self._indent)
 
@@ -87,7 +92,7 @@ class JsonFormatter(Formatter):
             raise ValueError(f'Formatting field not found in log record {err}')
 
     def format(self, record):
-        record.message = record.getMessage()
+        record.message = self.getMessage(record)
         record.asctime = self.formatTime(record, self.datefmt)
         formatted_record = self._format(record)
         if record.exc_info:

@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install -U poetry
+          poetry install --no-dev
+
+      - name: Poetry publish
+        run: |
+          poetry publish -n --build \
+            -u ${{ secrets.PYPI_USERNAME }} -p ${{ secrets.PYPI_PASSWORD }}
+
+      - uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: 'false'
+          prerelease: 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+
+      - uses: homoluctus/slatify@master
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: ':rocket: *Publish*'
+          channel: '#develop'
+          url: ${{ secrets.SLACK_WEBHOOK }}
