@@ -75,3 +75,17 @@ When exc_info is True, the result includes traceback infomation as follows:
   ]
 }
 ```
+
+Message type is dict:
+
+```bash
+{
+  'asctime': '2019-12-01 23:34:32',
+  'levelname': 'INFO',
+  'message': {
+    'id': '001',
+    'msg': 'This is test.',
+    'name': 'test'
+  }
+}
+```
