@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install -U poetry
+          poetry install --no-dev
+
+      - name: Poetry publish
+        run: |
+          poetry publish -n --build \
+            -u ${{ secrets.PYPI_USERNAME }} -p ${{ secrets.PYPI_PASSWORD }}

@@ -1,0 +1,48 @@
+name: Test
+
+on:
+  pull_request:
+    paths:
+      - 'json_pyformatter/**'
+      - 'tests/**'
+      - poetry.lock
+      - pyproject.toml
+      - tox.ini
+
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-18.04]
+        python: ['3.7', '3.8']
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: |
+          pip install -U poetry
+          poetry install
+
+      - name: Pytest
+        run: poetry run python -m pytest -v tests
+
+  slack:
+    name: Slack notification
+    needs: test
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: homoluctus/slatify@master
+        if: always()
+        with:
+          type: ${{ job.status }}
+          job_name: '*Pytest*'
+          channel: '#develop'
+          url: ${{ secrets.SLACK_WEBHOOK }}
+          commit: 'true'
+          token: ${{ secrets.GITHUB_TOKEN }}
