@@ -59,3 +59,19 @@ If specify indent option as 2, the result is as follows:
   "message": "hello"
 }
 ```
+
+When exc_info is True, the result includes traceback infomation as follows:
+
+```bash
+{
+  'asctime': '2019-12-01 13:58:34',
+  'levelname': 'ERROR',
+  'message': 'error occurred !!',
+  'traceback': [
+    'Traceback (most rec...ll last):',
+    'File "/example/test..._exc_info',
+    'raise TypeError(message)',
+    'TypeError: error occurred !!'
+  ]
+}
+```
