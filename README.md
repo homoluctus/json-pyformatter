@@ -1,5 +1,10 @@
 # json-pyformatter
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/homoluctus/json-pyformatter/Test)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/homoluctus/json-pyformatter?include_prereleases)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/json-pyformatter)
+![GitHub](https://img.shields.io/github/license/homoluctus/json-pyformatter)
+
 Python logging outputs as JSON.<br>
 This JsonFormatter is written in Pure Python.
 
