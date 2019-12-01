@@ -4,6 +4,40 @@ from logging import Formatter
 
 
 class JsonFormatter(Formatter):
+    """
+    Formatter outputs logging as JSON
+
+    The supported fields are:
+
+    name:       Name of the logger (logging channel)
+    levelno:    Numeric logging level for the message
+                (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    levelname:  Text logging level for the message
+                ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL")
+    pathname:   Full pathname of the source file where
+                the logging call was issued
+    filename:   Filename portion of pathname
+    module:     Module (name portion of filename)
+    lineno:     Source line number where the logging call was issued
+    funcName:   Function name
+    created:    Time when the LogRecord was created
+                (time.time()return value)
+    asctime:    Textual time when the LogRecord was created
+    msecs:      Millisecond portion of the creation time
+    relativeCreated:
+                Time in milliseconds when the LogRecord was created,
+                relative to the time the logging module was loaded
+                (typically at application startup time)
+    thread:     Thread ID
+    threadName: Thread name
+    process:    Process ID
+    message:    The result of record.getMessage(),
+                computed just as the record is emitted
+
+    (In details, please refere to
+    https://docs.python.org/3/library/logging.html#logrecord-attributes)
+    """
+
     default_fields = ('asctime', 'levelname', 'message')
 
     def __init__(self, fields=None, datefmt=None, indent=None):
@@ -11,6 +45,7 @@ class JsonFormatter(Formatter):
         Args:
             fields (tuple, list)
             datefmt (str)
+            indent (str, int)
         """
 
         self.fields = (
@@ -42,8 +77,9 @@ class JsonFormatter(Formatter):
         return json.dumps(record, ensure_ascii=False, indent=self._indent)
 
     def _format(self, record):
+        log = OrderedDict()
+
         try:
-            log = OrderedDict()
             for field in self.fields:
                 log[field] = getattr(record, field)
             return log
