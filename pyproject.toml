@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "JSONFormatter"
+name = "json-pyformatter"
 version = "0.0.1"
 description = "Python logging module outputs logs as JSON."
 authors = ["homoluctus <w.slife18sy@gmail.com>"]
