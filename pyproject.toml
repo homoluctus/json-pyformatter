@@ -1,9 +1,29 @@
 [tool.poetry]
 name = "json-pyformatter"
-version = "0.0.1"
+version = "0.1.0"
 description = "Python logging module outputs logs as JSON."
 authors = ["homoluctus <w.slife18sy@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/homoluctus/json-pyformatter"
+repository = "https://github.com/homoluctus/json-pyformatter"
+keywords = [
+  "python",
+  "json",
+  "logging",
+  "formatter"
+]
+packages = [
+  { include = "json_pyformatter" }
+]
+classifiers = [
+ "Development Status :: 5 - Production/Stable",
+ "License :: OSI Approved :: MIT License",
+ "Programming Language :: Python",
+ "Programming Language :: Python :: 3",
+ "Programming Language :: Python :: 3.7",
+ "Programming Language :: Python :: 3.8"
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
